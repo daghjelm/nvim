@@ -1,28 +1,29 @@
+local set = vim.opt 
 --Formatting
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-vim.opt.smartindent = true
+set.tabstop = 2
+set.softtabstop = 2
+set.shiftwidth = 2
+set.expandtab = true
+set.smartindent = true
 
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
+set.hlsearch = true
+set.incsearch = true
 
-vim.opt.relativenumber = true
-vim.opt.number = true
+set.relativenumber = true
+set.number = true
 
 --Enable backspace
-vim.opt.backspace = '2'
+set.backspace = '2'
 
-vim.opt.hidden = true
+set.hidden = true
 
-vim.opt.termguicolors = true
+set.termguicolors = true
 
 --For multiple line errors, lints etc
-vim.opt.cmdheight = 2
+set.cmdheight = 2
 
 --Faster updates
-vim.opt.updatetime = 300
+set.updatetime = 300
 
 --Keymaps
 local keymap = vim.api.nvim_set_keymap

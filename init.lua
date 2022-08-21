@@ -1,3 +1,5 @@
 require('plugins')
 require('colors')
 require('settings')
+require('nvim-tree-config')
+require('mappings')
