@@ -3,11 +3,26 @@ local opts = { noremap = true, silent = true}
 
 vim.g.mapleader = ' '
 
+
 --Copy with leader - y
 keymap('v', '<leader>y', '"*y', opts)
 
 --select everything with leader-a
 keymap('n', '<leader>a', 'gg<s-v><s-g>', opts)
+
+--start a search and replace with leader-r
+keymap('n', '<leader>r', ':%s/', opts)
+
+keymap('n', '<leader>r', ':%s/', opts)
+
+--switch windows with shift-h, shift-l, etc
+keymap('n', '<s-h>', '<C-w>h', opts)
+keymap('n', '<s-l>', '<C-w>l', opts)
+keymap('n', '<s-j>', '<C-w>j', opts)
+keymap('n', '<s-k>', '<C-w>k', opts)
+
+--clear search pattern with escape in normal mode
+keymap('n', '<esc>', ':noh<cr>', opts)
 
 --Telescope remaps
 --nnoremap <c-p> :lua require"telescope.builtin".find_files{}<CR>
