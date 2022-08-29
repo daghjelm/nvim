@@ -3,7 +3,6 @@ local opts = { noremap = true, silent = true}
 
 vim.g.mapleader = ' '
 
-
 --Copy with leader - y
 keymap('v', '<leader>y', '"*y', opts)
 
@@ -23,6 +22,10 @@ keymap('n', '<s-k>', '<C-w>k', opts)
 
 --clear search pattern with escape in normal mode
 keymap('n', '<esc>', ':noh<cr>', opts)
+
+--split panes with <leader>v for vertical and <leader>h for horizontal
+keymap('n', '<leader>v', ':vsplit<cr>', opts)
+keymap('n', '<leader>h', ':split<cr>', opts)
 
 --Telescope remaps
 --nnoremap <c-p> :lua require"telescope.builtin".find_files{}<CR>
