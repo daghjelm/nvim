@@ -15,10 +15,10 @@ keymap('n', '<leader>r', ':%s/', opts)
 keymap('n', '<leader>r', ':%s/', opts)
 
 --switch windows with shift-h, shift-l, etc
-keymap('n', '<s-h>', '<C-w>h', opts)
-keymap('n', '<s-l>', '<C-w>l', opts)
-keymap('n', '<s-j>', '<C-w>j', opts)
-keymap('n', '<s-k>', '<C-w>k', opts)
+--keymap('n', '<s-h>', '<C-w>h', opts)
+--keymap('n', '<s-l>', '<C-w>l', opts)
+--keymap('n', '<s-j>', '<C-w>j', opts)
+--keymap('n', '<s-k>', '<C-w>k', opts)
 
 --clear search pattern with escape in normal mode
 keymap('n', '<esc>', ':noh<cr>', opts)

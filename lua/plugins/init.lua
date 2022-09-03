@@ -4,23 +4,29 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
-  use 'ellisonleao/gruvbox.nvim'
-  use {
-    'nvim-treesitter/nvim-treesitter',
+  use('wbthomason/packer.nvim')
+  use('ellisonleao/gruvbox.nvim')
+  use('nvim-treesitter/nvim-treesitter', {
     run = ':TSUpdate'
-  }
-  use 'neovim/nvim-lspconfig' 
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    -- or                            , branch = '0.1.x',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
-  use {
-    'kyazdani42/nvim-web-devicons', -- optional, for file icons
-  }
-  use {
-    'kyazdani42/nvim-tree.lua',
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
-  }
+  })
+  use("williamboman/mason.nvim")
+  use("williamboman/mason-lspconfig.nvim")
+  use("neovim/nvim-lspconfig")
+  use('nvim-lua/plenary.nvim')
+  use('nvim-telescope/telescope.nvim') 
+  use('kyazdani42/nvim-web-devicons')
+  use('kyazdani42/nvim-tree.lua', {
+    tag = 'nightly' -- optional, updated every week. (see issue #1193) 
+  })
+  use('mfussenegger/nvim-dap')
+  use('jose-elias-alvarez/null-ls.nvim')
+
+  use('hrsh7th/cmp-nvim-lsp')
+  use('hrsh7th/cmp-buffer')
+  use('hrsh7th/cmp-path')
+  use('hrsh7th/cmp-cmdline')
+  use('hrsh7th/nvim-cmp')
+
+  use('L3MON4D3/LuaSnip')
+  use('saadparwaiz1/cmp_luasnip')
 end)
