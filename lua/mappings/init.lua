@@ -12,13 +12,11 @@ keymap('n', '<leader>a', 'gg<s-v><s-g>', opts)
 --start a search and replace with leader-r
 keymap('n', '<leader>r', ':%s/', opts)
 
-keymap('n', '<leader>r', ':%s/', opts)
-
---switch windows with shift-h, shift-l, etc
---keymap('n', '<s-h>', '<C-w>h', opts)
---keymap('n', '<s-l>', '<C-w>l', opts)
---keymap('n', '<s-j>', '<C-w>j', opts)
---keymap('n', '<s-k>', '<C-w>k', opts)
+--switch windows with ctrl-h, -l, etc
+--keymap('n', '<c-h>', '<C-w>h', opts)
+--keymap('n', '<c-l>', '<C-w>l', opts)
+--keymap('n', '<c-j>', '<C-w>j', opts)
+--keymap('n', '<c-k>', '<C-w>k', opts)
 
 --clear search pattern with escape in normal mode
 keymap('n', '<esc>', ':noh<cr>', opts)
