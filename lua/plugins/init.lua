@@ -10,14 +10,15 @@ return require('packer').startup(function(use)
   use('nvim-treesitter/nvim-treesitter', {
     run = ':TSUpdate'
   })
+  use('nvim-treesitter/nvim-treesitter-context')
   use("williamboman/mason.nvim")
   use("williamboman/mason-lspconfig.nvim")
   use("neovim/nvim-lspconfig")
   use('nvim-lua/plenary.nvim')
-  use('nvim-telescope/telescope.nvim') 
+  use('nvim-telescope/telescope.nvim')
   use('kyazdani42/nvim-web-devicons')
   use('kyazdani42/nvim-tree.lua', {
-    tag = 'nightly' -- optional, updated every week. (see issue #1193) 
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
   })
   use('mfussenegger/nvim-dap')
   use('jose-elias-alvarez/null-ls.nvim')

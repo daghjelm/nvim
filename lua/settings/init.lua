@@ -1,4 +1,4 @@
-local set = vim.opt 
+local set = vim.opt
 --Formatting
 set.tabstop = 2
 set.softtabstop = 2
