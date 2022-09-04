@@ -6,6 +6,7 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use('wbthomason/packer.nvim')
   use('ellisonleao/gruvbox.nvim')
+  use('folke/tokyonight.nvim')
   use('nvim-treesitter/nvim-treesitter', {
     run = ':TSUpdate'
   })
