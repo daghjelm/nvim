@@ -6,6 +6,9 @@ set.shiftwidth = 2
 set.expandtab = true
 set.smartindent = true
 
+--disable wrapping
+set.wrap = false
+
 --highlight search
 set.hlsearch = true
 
