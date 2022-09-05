@@ -7,3 +7,5 @@ require('lsp-config')
 require('cmp-config')
 require('tree-sitter-config')
 require('nvim-autopairs-config')
+require('formatter-config')
+
