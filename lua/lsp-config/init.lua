@@ -47,4 +47,5 @@ require'lspconfig'.tsserver.setup{}
 require'lspconfig'.gopls.setup{}
 require'lspconfig'.sumneko_lua.setup{}
 require'lspconfig'.clangd.setup{}
+require'lspconfig'.jdtls.setup{}
 require("luasnip.loaders.from_vscode").lazy_load()
