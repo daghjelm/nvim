@@ -38,4 +38,3 @@ keymap('n', '<c-b>', ':NvimTreeToggle<cr>', opts)
 --formatter
 keymap('n', '<leader>f', ':Format<cr>', opts)
 keymap('n', '<leader>F', ':FormatWrite<cr>', opts)
-

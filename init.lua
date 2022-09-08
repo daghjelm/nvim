@@ -8,4 +8,6 @@ require('cmp-config')
 require('tree-sitter-config')
 require('nvim-autopairs-config')
 require('formatter-config')
+require('snippets')
+require('copilot')
 
