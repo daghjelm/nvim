@@ -42,7 +42,8 @@ vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 
 require("mason").setup()
 require("mason-lspconfig").setup()
-require'lspconfig'.pyright.setup{}
+--require'lspconfig'.pyright.setup{}
+require'lspconfig'.jedi_language_server.setup{}
 require'lspconfig'.tsserver.setup{}
 require'lspconfig'.gopls.setup{}
 require'lspconfig'.sumneko_lua.setup{}

@@ -11,6 +11,24 @@ require('formatter').setup({
           }
         end
     },
+    rust = {
+      function() 
+        return {
+          exe = "rustfmt",
+          args = {"--emit=stdout"},
+          stdin = true
+        }
+    end
+    },
+    go = {
+      function()
+        return {
+          exe = "gofmt",
+          args = {},
+          stdin = true
+        }
+      end
+    },
     -- other formatters ...
   }
 })
