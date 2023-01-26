@@ -6,6 +6,8 @@ set.shiftwidth = 2
 set.expandtab = true
 set.smartindent = true
 
+set.mouse = 'a'
+
 --disable wrapping
 set.wrap = false
 

@@ -28,6 +28,7 @@ keymap('n', '<leader>h', ':split<cr>', opts)
 --Telescope remaps
 --nnoremap <c-p> :lua require"telescope.builtin".find_files{}<CR>
 keymap('n', '<c-p>', '<cmd>lua require("telescope.builtin").find_files()<cr>', opts)
+keymap('n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files()<cr>', opts)
 keymap('n', '<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
 keymap('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
 keymap('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
@@ -40,4 +41,13 @@ keymap('n', '<leader>f', ':Format<cr>', opts)
 keymap('n', '<leader>F', ':FormatWrite<cr>', opts)
 keymap('n', '<c-/>', ':CommentToggle<cr>', opts)
 keymap('v', '<c-/>', ':CommentToggle<cr>', opts)
+
+--tabs
+keymap('n', '<leader>t', ':tab split<cr>', opts)
+keymap('n', '<leader>1', '1gt', opts)
+keymap('n', '<leader>2', '2gt', opts)
+keymap('n', '<leader>3', '3gt', opts)
+keymap('n', '<leader>4', '4gt', opts)
+keymap('n', '<leader>5', '5gt', opts)
+keymap('n', '<leader>6', '6gt', opts)
 

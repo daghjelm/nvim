@@ -10,4 +10,5 @@ require('nvim-autopairs-config')
 require('formatter-config')
 require('snippets')
 require('copilot')
+require('comment-toggle-config')
 
