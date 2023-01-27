@@ -28,8 +28,8 @@ keymap('n', '<leader>h', ':split<cr>', opts)
 --Telescope remaps
 --nnoremap <c-p> :lua require"telescope.builtin".find_files{}<CR>
 keymap('n', '<c-p>', '<cmd>lua require("telescope.builtin").find_files()<cr>', opts)
-keymap('n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files()<cr>', opts)
-keymap('n', '<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
+keymap('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>", opts)
+keymap('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts)
 keymap('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
 keymap('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
 

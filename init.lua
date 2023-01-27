@@ -1,4 +1,5 @@
 require('plugins')
+require('telescope-config')
 require('colors')
 require('settings')
 require('nvim-tree-config')
@@ -11,4 +12,3 @@ require('formatter-config')
 require('snippets')
 require('copilot')
 require('comment-toggle-config')
-
