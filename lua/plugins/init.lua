@@ -1,7 +1,5 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 -- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
-
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use('wbthomason/packer.nvim')
@@ -18,7 +16,7 @@ return require('packer').startup(function(use)
   use('nvim-telescope/telescope.nvim')
   use('kyazdani42/nvim-web-devicons')
   use('kyazdani42/nvim-tree.lua', {
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+--    tag = 'nightly' -- optional, updated every week. (see issue #1193)
   })
   use('mfussenegger/nvim-dap')
   use('jose-elias-alvarez/null-ls.nvim')
@@ -30,7 +28,7 @@ return require('packer').startup(function(use)
   use('hrsh7th/nvim-cmp')
   use('saadparwaiz1/cmp_luasnip')
 
-  use({"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"})
+  use({"L3MON4D3/LuaSnip"})
   use('rafamadriz/friendly-snippets')
 
   use('windwp/nvim-autopairs')

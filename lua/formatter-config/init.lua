@@ -12,7 +12,7 @@ require('formatter').setup({
         end
     },
     rust = {
-      function() 
+      function()
         return {
           exe = "rustfmt",
           args = {"--emit=stdout"},
