@@ -23,7 +23,13 @@ keymap('n', '<esc>', ':noh<cr>', opts)
 
 --split panes with <leader>v for vertical and <leader>h for horizontal
 keymap('n', '<leader>v', ':vsplit<cr>', opts)
-keymap('n', '<leader>h', ':split<cr>', opts)
+keymap('n', '<leader>s', ':split<cr>', opts)
+
+--navigate panes with leader + hjkl
+keymap('n', '<leader>h', '<C-w>h', opts)
+keymap('n', '<leader>l', '<C-w>l', opts)
+keymap('n', '<leader>j', '<C-w>j', opts)
+keymap('n', '<leader>k', '<C-w>k', opts)
 
 --Telescope remaps
 --nnoremap <c-p> :lua require"telescope.builtin".find_files{}<CR>
@@ -41,6 +47,7 @@ keymap('n', '<leader>f', ':Format<cr>', opts)
 keymap('n', '<leader>F', ':FormatWrite<cr>', opts)
 keymap('n', '<c-/>', ':CommentToggle<cr>', opts)
 keymap('v', '<c-/>', ':CommentToggle<cr>', opts)
+keymap('i', '<c-/>', '<esc>:CommentToggle<cr>a', opts)
 
 --tabs
 keymap('n', '<leader>t', ':tab split<cr>', opts)
