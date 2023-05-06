@@ -36,9 +36,10 @@ vim.keymap.set('n', '<space>wl', function()
 end, opts)
 vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
 vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+vim.keymap.set('n', '<C-r-n>', vim.lsp.buf.rename, opts)
 vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
---vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, opts)
+vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, opts)
 
 require("mason").setup()
 require("mason-lspconfig").setup()
@@ -50,3 +51,4 @@ require'lspconfig'.sumneko_lua.setup{}
 require'lspconfig'.clangd.setup{}
 require'lspconfig'.jdtls.setup{}
 require'lspconfig'.rust_analyzer.setup{}
+--require'lspconfig'.haskell_language_server.setup{}

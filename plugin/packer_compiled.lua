@@ -79,11 +79,6 @@ _G.packer_plugins = {
     path = "/Users/daghjelm/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ["blamer.nvim"] = {
-    loaded = true,
-    path = "/Users/daghjelm/.local/share/nvim/site/pack/packer/start/blamer.nvim",
-    url = "https://github.com/APZelos/blamer.nvim"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/daghjelm/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -128,6 +123,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/daghjelm/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
     url = "https://github.com/ellisonleao/gruvbox.nvim"
+  },
+  ["haskell-tools.nvim"] = {
+    loaded = true,
+    path = "/Users/daghjelm/.local/share/nvim/site/pack/packer/start/haskell-tools.nvim",
+    url = "https://github.com/mrcjkb/haskell-tools.nvim"
   },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
