@@ -32,3 +32,6 @@ set.cmdheight = 2
 
 --Faster updates
 set.updatetime = 300
+
+-- keep 10 lines in the top and bottom (scrolloff)
+set.scrolloff = 10
