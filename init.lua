@@ -1,3 +1,4 @@
+vim.cmd('language en_US')
 require('plugins')
 require('telescope-config')
 require('colors')
