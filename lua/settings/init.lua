@@ -32,3 +32,5 @@ set.cmdheight = 2
 
 --Faster updates
 set.updatetime = 300
+
+set.scrolloff = 10
