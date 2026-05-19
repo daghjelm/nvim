@@ -25,16 +25,5 @@ require("lazy").setup({
   },
 })
 
-require('telescope-config')
-require('colors')
 require('settings')
-require('nvim-tree-config')
 require('mappings')
-require('lsp-config')
-require('cmp-config')
-require('tree-sitter-config')
-require('nvim-autopairs-config')
-require('formatter-config')
-require('snippets')
-require('copilot')
-require('comment-toggle-config')
