@@ -17,7 +17,7 @@ lua/
   snippets/init.lua             -- LuaSnip + friendly-snippets loader
   nvim-autopairs-config/init.lua
   comment-toggle-config/init.lua
-  colors/init.lua               -- Colorscheme (tokyonight)
+  colors/init.lua               -- Colorscheme setup
   copilot/init.lua              -- GitHub Copilot settings
 ```
 
@@ -38,6 +38,17 @@ Each plugin's config callback in `plugins/init.lua` calls `require('<config-dir>
 - `:MasonInstall <server>` installs a language server
 - LSP servers are configured in `lua/lsp-config/init.lua` using the native `vim.lsp.config[]` + `vim.lsp.enable()` API (nvim 0.12+)
 - Shared config (capabilities, root_markers) is set via `vim.lsp.config('*', ...)`
+
+## Colorscheme
+
+- Light mode: `onelight` (from `olimorris/onedarkpro.nvim`)
+- Dark mode: `tokyonight` (from `folke/tokyonight.nvim`)
+
+To switch between light and dark mode, update two things in `lua/colors/init.lua`:
+1. `vim.o.background` — set to `"light"` or `"dark"`
+2. `vim.cmd([[colorscheme <name>]])` — set to `onelight` or `tokyonight`
+
+Also ensure the active theme's plugin in `lua/plugins/init.lua` has `lazy = false` and `priority = 1000` with the `config` callback, and the inactive theme is set to `lazy = true`.
 
 ## Adding a New LSP Server
 
