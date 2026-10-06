@@ -10,8 +10,13 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     build = function()
-      require('nvim-treesitter').install({ "c", "lua", "rust", "go", "javascript", "typescript" })
+      require('nvim-treesitter').install({ "c", "lua", "rust", "go", "javascript", "typescript", "markdown", "markdown_inline" })
     end,
+  },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'kyazdani42/nvim-web-devicons' },
+    config = function() require('render-markdown-config') end,
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
