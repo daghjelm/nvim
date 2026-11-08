@@ -30,7 +30,8 @@ return {
   {
     'williamboman/mason-lspconfig.nvim',
     dependencies = { 'williamboman/mason.nvim' },
-    config = function() require('mason-lspconfig').setup() end,
+    -- jdtls is started by nvim-jdtls in ftplugin/java.lua, not by vim.lsp.enable
+    config = function() require('mason-lspconfig').setup({ automatic_enable = { exclude = { 'jdtls' } } }) end,
   },
   {
     'neovim/nvim-lspconfig',
@@ -40,7 +41,11 @@ return {
   { 'nvim-lua/plenary.nvim', lazy = true },
   {
     'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      -- C sorter; the default Lua sorter is unusable on large repos like ~/src/backend
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    },
     config = function() require('telescope-config') end,
   },
   { 'kyazdani42/nvim-web-devicons', lazy = true },

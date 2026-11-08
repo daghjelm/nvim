@@ -4,72 +4,84 @@ set_local.tabstop = 4
 set_local.shiftwidth = 4
 set_local.expandtab = true
 
--- If you started neovim within `~/dev/xy/project-1` this would resolve to `project-1`
-local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+local jdtls = require('jdtls')
+local jdtls_setup = require('jdtls.setup')
 
-local workspace_dir = '/Users/daghjelm/java_data/' .. project_name
+-- Override either in lua/local.lua; the monorepo logic below only runs for files under monorepo_root
+local monorepo_root = vim.fn.expand(vim.g.monorepo_root or '~/src/backend')
+local java_home = vim.fn.expand(vim.g.java_home or vim.env.JAVA_HOME or '~/.sdkman/candidates/java/current')
 
--- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
+-- Path of the current file relative to the monorepo, or nil if outside it
+local function monorepo_relpath(file)
+  if vim.startswith(file, monorepo_root .. '/') then
+    return file:sub(#monorepo_root + 2)
+  end
+end
+
+-- :BazelSetup — generate .classpath/.project for the current component
+-- (<system>/<component>) with `spt ide:setup-classpath`, then restart jdtls.
+-- Re-run after changing BUILD deps, protos, or switching branches.
+vim.api.nvim_buf_create_user_command(0, 'BazelSetup', function()
+  local rel = monorepo_relpath(vim.api.nvim_buf_get_name(0))
+  local component = rel and rel:match('^([^/]+/[^/]+)/')
+  if not component then
+    vim.notify('BazelSetup: not inside a component in ' .. monorepo_root, vim.log.levels.ERROR)
+    return
+  end
+  vim.notify('BazelSetup: running spt ide:setup-classpath ' .. component .. ' ...')
+  vim.system({ 'spt', 'ide:setup-classpath', component }, { cwd = monorepo_root, text = true }, function(res)
+    vim.schedule(function()
+      if res.code ~= 0 then
+        vim.notify('BazelSetup failed:\n' .. (res.stderr or '') .. (res.stdout or ''), vim.log.levels.ERROR)
+        return
+      end
+      vim.notify('BazelSetup: done for ' .. component .. ', reopen the file (:e) to start jdtls')
+    end)
+  end)
+end, {})
+
+local file = vim.api.nvim_buf_get_name(0)
+local root_dir
+if monorepo_relpath(file) then
+  -- In the monorepo jdtls only works on components with a generated .classpath
+  root_dir = jdtls_setup.find_root({ '.classpath' })
+  if not root_dir then
+    vim.notify_once('jdtls: no .classpath for this component, run :BazelSetup', vim.log.levels.WARN)
+    return
+  end
+else
+  root_dir = jdtls_setup.find_root({ 'mvnw', 'gradlew', 'pom.xml', 'build.gradle', '.git' })
+  if not root_dir then
+    return
+  end
+end
+
+-- One jdtls workspace (index/cache) per project root
+local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls-workspace/' .. root_dir:gsub('/', '%%')
+
 local config = {
-  -- The command that starts the language server
-  -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
-  cmd = {
-
-    -- 💀
-    'java', -- or '/path/to/java17_or_newer/bin/java'
-            -- depends on if `java` is in your $PATH env variable and if it points to the right version.
-
-    '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-    '-Dosgi.bundles.defaultStartLevel=4',
-    '-Declipse.product=org.eclipse.jdt.ls.core.product',
-    '-Dlog.protocol=true',
-    '-Dlog.level=ALL',
-    '-Xms1g',
-    '--add-modules=ALL-SYSTEM',
-    '--add-opens', 'java.base/java.util=ALL-UNNAMED',
-    '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-
-    -- 💀
-    '-jar', '/Users/daghjelm/jdtls/jdt-language-server-1.9.0-202203031534/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
-         -- Must point to the                                                     
-         -- eclipse.jdt.ls installation                                           
-
-
-    -- 💀
-    '-configuration', '/Users/daghjelm/jdtls/jdt-language-server-1.9.0-202203031534/config_mac',
-                    -- Must point to the                      Change to one of `linux`, `win` or `mac`
-                    -- eclipse.jdt.ls installation            Depending on your system.
-
-
-    -- 💀
-    -- See `data directory configuration` section in the README
-    '-data', workspace_dir,
-  },
-
-  -- 💀
-  -- This is the default if not provided, you can remove it. Or adjust as needed.
-  -- One dedicated LSP server & client will be started per unique root_dir
-  root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'}),
-
-  -- Here you can configure eclipse.jdt.ls specific settings
-  -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
-  -- for a list of options
+  -- Mason's jdtls wrapper; it runs on the `java` in PATH (needs Java 21+)
+  cmd = { vim.fn.stdpath('data') .. '/mason/bin/jdtls', '-data', workspace_dir },
+  root_dir = root_dir,
+  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
   settings = {
     java = {
-    }
+      configuration = {
+        -- .classpath generated by spt references the JavaSE-25 container
+        runtimes = {
+          { name = 'JavaSE-25', path = java_home, default = true },
+        },
+      },
+      import = {
+        -- The monorepo uses Bazel; don't let jdtls try to import as Maven/Gradle
+        maven = { enabled = not monorepo_relpath(file) },
+        gradle = { enabled = not monorepo_relpath(file) },
+      },
+    },
   },
-
-  -- Language server `initializationOptions`
-  -- You need to extend the `bundles` with paths to jar files
-  -- if you want to use additional eclipse.jdt.ls plugins.
-  --
-  -- See https://github.com/mfussenegger/nvim-jdtls#java-debug-installation
-  --
-  -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
   init_options = {
-    bundles = {}
+    bundles = {},
   },
 }
--- This starts a new client & server,
--- or attaches to an existing client & server depending on the `root_dir`.
-require('jdtls').start_or_attach(config)
+
+jdtls.start_or_attach(config)

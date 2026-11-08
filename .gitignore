@@ -1,0 +1,6 @@
+# Machine-specific overrides, see lua/local.example.lua
+lua/local.lua
+
+# Generated files with absolute paths (packer leftovers)
+plugin/packer_compiled.lua
+lua/.luarc.json

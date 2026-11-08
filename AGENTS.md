@@ -19,6 +19,7 @@ lua/
   comment-toggle-config/init.lua
   colors/init.lua               -- Colorscheme setup
   copilot/init.lua              -- GitHub Copilot settings
+  local.lua                     -- Machine-specific overrides (gitignored, copy from local.example.lua)
 ```
 
 Each plugin's config callback in `plugins/init.lua` calls `require('<config-dir>')` to keep setup logic in separate files.
